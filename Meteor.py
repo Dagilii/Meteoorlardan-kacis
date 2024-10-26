@@ -9,6 +9,7 @@ class Meteor:
         self.boyut=boyut
         self.yon=yon
         self.hiz=hiz
+        self.hit_box=pygame.Rect(0,0,0,0)
 
     def rastgele_yerlestir(self,ekranboyutlar):
         self.x= random.randint(0,ekranboyutlar[0])
@@ -17,6 +18,7 @@ class Meteor:
         self.hiz=random.randint(5,15)
         self.boyut=(random.randint(25,75),random.randint(25,75))
 
+
     def update(self,ekranboyutlar):
         self.x+=self.hiz*self.yon[0]
         self.y+=self.hiz*self.yon[1]
@@ -24,4 +26,4 @@ class Meteor:
             self.rastgele_yerlestir(ekranboyutlar)
    
     def render(self,ekran):
-        pygame.draw.rect(ekran,(255,0,0),(self.x,self.y,*self.boyut))
+        self.hit_box=pygame.draw.rect(ekran,(255,0,0),(self.x,self.y,*self.boyut))
