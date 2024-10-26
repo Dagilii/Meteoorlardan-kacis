@@ -7,6 +7,8 @@ ekran_boyutlar=(1280, 720)
 pygame.init()
 screen = pygame.display.set_mode(ekran_boyutlar)
 clock = pygame.time.Clock()
+meteor_resmi=pygame.image.load("Meteor.png")
+
 
 arkaplan_resmi = pygame.image.load('uzay.jpg')
 
@@ -46,7 +48,7 @@ while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
-               
+
     oyuncu.update(ekran_boyutlar)
 
     for meteor in meteor_list:
@@ -70,7 +72,15 @@ while running:
     
     oyuncu.render(screen)
     for meteor in meteor_list:
-        meteor.render(screen)
+        if meteor.yon[0]==1:
+            selfresim=pygame.transform.scale(meteor_resmi,meteor.boyut)
+            selfresim = pygame.transform.rotate(selfresim,45)
+        elif meteor.yon[0]==-1:
+            selfresim=pygame.transform.scale(meteor_resmi,meteor.boyut)
+            selfresim = pygame.transform.rotate(selfresim,-45)
+        else:
+            selfresim=pygame.transform.scale(meteor_resmi,meteor.boyut)
+        meteor.render(screen,selfresim)
 
     if oyuncu.can==False:
         screen.blit(olumyazi,(300,365))

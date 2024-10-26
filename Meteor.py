@@ -16,7 +16,8 @@ class Meteor:
         self.y=-50
         self.yon = (random.randint(-1,1),1)
         self.hiz=random.randint(5,15)
-        self.boyut=(random.randint(25,75),random.randint(25,75))
+        a =random.randint(25,75)
+        self.boyut=(a,a*34/18)
 
 
     def update(self,ekranboyutlar):
@@ -25,5 +26,6 @@ class Meteor:
         if self.x<=0 or self.x>=ekranboyutlar[0] or self.y >= ekranboyutlar[1]:
             self.rastgele_yerlestir(ekranboyutlar)
    
-    def render(self,ekran):
-        self.hit_box=pygame.draw.rect(ekran,(255,0,0),(self.x,self.y,*self.boyut))
+    def render(self,ekran,resim):
+        self.hit_box=pygame.rect.Rect((self.x,self.y,*self.boyut))
+        ekran.blit(resim,self.hit_box)
